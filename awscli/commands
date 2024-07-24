@@ -1,7 +1,7 @@
 run this script to create a bastion host in the public subnet
-./env_var3.sh ap-south-1 ami-0d1e92463a5acf79d t2.micro test public-sct-grp subnet-00825ad3385e5ec2c MyCFT-bastion-inst
+./env_pub_inst.sh aws_region ami-1234567890abcdefg t2.micro key_name name-of-public-security-group subnet-1234567890abcdefg name-of-instance
 
 
 run the script to create a instance in private-subnet
-./env_prvt_inst.sh ap-south-1 ami-0d1e92463a5acf79d t2.micro test prvt-security subnet-04496d996c251c823 MyCFT-prvt-inst
+./env_prvt_inst.sh aws_region ami-1234567890abcdefg t2.micro key_name name-of-private-security-group subnet-1234567890abcdefg name-of-instance
 
