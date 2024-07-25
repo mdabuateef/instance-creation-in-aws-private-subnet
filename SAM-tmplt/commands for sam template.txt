@@ -1,0 +1,20 @@
+
+creation of package.yaml for the public template command
+sam package --template-file ec2-sam-pub-tmplt.yaml --output-template-file packaged.yaml --s3-bucket abuateef-2
+
+deploying the package.yaml created for the template
+sam deploy --template-file packaged.yaml --stack-name ec2-inst-pub-stack --parameter-overrides InstanceType=t2.micro KeyName=test ImageId=ami-0d1e92463a5acf79d VpcId=vpc-0eec17d1c4f980928 SubnetId=subnet-00825ad3385e5ec2c AvailabilityZone=ap-south-1a SecurityGroupId=sg-0627d10fbc2727049
+
+deleting the stack for the sam template
+aws cloudformation delete-stack --stack-name ec2-inst-pub-stack
+
+***********************************************************************************
+creation of package.yaml for the private template command
+sam package --template-file ec2-sam-prvt-tmplt.yaml --output-template-file packaged.yaml --s3-bucket abuateef-2
+
+deploying the package.yaml created for the template
+sam deploy --template-file packaged.yaml --stack-name ec2-inst-prvt-stack --parameter-overrides InstanceType=t2.micro KeyName=test ImageId=ami-0d1e92463a5acf79d VpcId=vpc-0eec17d1c4f980928 SubnetId=subnet-04496d996c251c823 AvailabilityZone=ap-south-1b SecurityGroupId=sg-0d065cd33023faa21
+
+deleting the stack for the sam template
+aws cloudformation delete-stack --stack-name ec2-inst-prvt-stack
+

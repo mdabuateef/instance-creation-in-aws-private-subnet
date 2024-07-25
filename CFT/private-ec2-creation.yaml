@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Provision an EC2 instance in an existing VPC
+
+Parameters:
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance.
+
+  InstanceType:
+    Type: String
+    Description: EC2 instance type.
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC ID where the EC2 instance will be launched.
+
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: The Subnet ID where the EC2 instance will be launched.
+
+  SecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Description: The Security Group ID to associate with the EC2 instance.
+
+  AMIId:
+    Type: AWS::EC2::Image::Id
+    Description: The AMI ID to use for the EC2 instance.
+
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: false
+          DeviceIndex: 0
+          SubnetId: !Ref SubnetId
+          GroupSet:
+            - !Ref SecurityGroupId
+      ImageId: !Ref AMIId
+      Tags:
+        - Key: Name
+          Value: MyCFT-prvt-Inst
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID of the newly created EC2 instance.
+    Value: !Ref MyEC2Instance

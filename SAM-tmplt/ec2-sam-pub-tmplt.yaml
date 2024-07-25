@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Parameters:
+  InstanceType:
+    Description: EC2 instance type
+    Type: String
+    Default: t2.micro
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+  ImageId:
+    Description: AMI ID for the EC2 instance
+    Type: String
+    Default: ami-0d1e92463a5acf79d
+  VpcId:
+    Description: The VPC ID where the instance will be deployed
+    Type: AWS::EC2::VPC::Id
+  SubnetId:
+    Description: The Subnet ID where the instance will be deployed
+    Type: AWS::EC2::Subnet::Id
+  SecurityGroupId:
+    Description: The ID of an existing security group to associate with the instance
+    Type: AWS::EC2::SecurityGroup::Id
+  AvailabilityZone:
+    Description: The Availability Zone for the subnet
+    Type: String
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId: !Ref ImageId
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: '0'
+          SubnetId: !Ref SubnetId
+          GroupSet:
+            - !Ref SecurityGroupId
+
+  

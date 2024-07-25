@@ -1,0 +1,3 @@
+https://developer.hashicorp.com/packer/integrations/hashicorp/amazon
+
+HashiCorp Packer Tutorial: Building Custom Images for AWS, Azure, and Docker kodecloud youtube

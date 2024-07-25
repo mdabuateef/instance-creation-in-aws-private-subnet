@@ -1,0 +1,22 @@
+install python 
+sudo yum install python
+
+install pip 
+sudo yum install pip
+
+configure aws
+
+create a file ec2-python-creation.py
+set file executable 
+sudo chmod +x ec2-creatoin-pub.py
+sudo chmod +x ec2-creation-prvt.py
+
+
+run the ec2-python-creation.py for public using command 
+python ec2-creation-pub.py --image-id ami-0d1e92463a5acf79d --subnet-id subnet-00825ad3385e5ec2c --security-group-id sg-0627d10fbc2727049 --key-name test --instance-type t2.micro --instance-name my-python-instance
+
+privt instance
+python ec2-creation-prvt.py --image-id ami-0d1e92463a5acf79d --subnet-id subnet-04496d996c251c823 --security-group-id sg-0d065cd33023faa21 --key-name test --instance-type t2.micro --instance-name my-python-prvt-instance
+
+deletion of instance created
+python ec2-pythn-delete.py --instance-id i-0d6bf370385c2c38f
